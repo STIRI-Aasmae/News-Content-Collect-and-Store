@@ -9,10 +9,15 @@ from bs4 import BeautifulSoup as soup
 from newspaper import Config
 from lxml.etree import ParseError
 from lxml.etree import ParserError
+
+
+
 from urllib.request import urlopen
 from newspaper import Article
 from readability import Document
 import re
+
+import json
 # Create your views here.
 
 @csrf_exempt
@@ -21,8 +26,14 @@ def add_article(request):
     user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
     config = Config()
     config.browser_user_agent = user_agent
-
-    Website = request.POST.get("Website")
+    if request.method == 'POST':
+        json_data = json.loads(request.body)
+        try:
+            Website= json_data['Website']
+        except KeyError:
+            HttpResponse("malformed data!")
+        HttpResponse("got json data")
+    #Website = request.POST.get("Website")
     op = urlopen(str(Website))
     rd = op.read()
     op.close()
@@ -47,8 +58,9 @@ def add_article(request):
                           Authors = article.authors,Publish_Date = str(article.publish_date),
                           Article = var, URL = str(urls[i]))
             print(Website)
+
             clean_article.save()
-        except (ParserError, ParseError,etree.ParserError):
+        except :
             continue
 
 
@@ -59,6 +71,7 @@ def get_article(request, keywords):
     allArticls = Articleinfo.objects.all()
     for article in allArticls:
         if keywords in article.Article:
-            compatible_articles.append(article.Article)
 
-    return HttpResponse(compatible_articles)
+            compatible_articles.append("{Title"+" : "+str(article.Title)+",Authors"+" : "+str(article.Authors)+",Publish_Date"+" : "+str(article.Publish_Date)+",Article" +" : "+str(article.Article)+",URL" +" : "+str(article.URL)+"}")
+
+    return HttpResponse(json.dumps(compatible_articles))
