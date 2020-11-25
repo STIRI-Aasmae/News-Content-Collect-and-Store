@@ -9,4 +9,5 @@ This repository consists of three projects:
 3. The third one **articleFrontend** is the front-end of the two API that enable the user to interract with the APIs simply without having any information about the structre of the back-end.
 Searchin article talkin about satellites from the front-end.
 ![4](https://user-images.githubusercontent.com/61889763/100281818-df0ad500-2f6a-11eb-86f2-3bdc6aef4535.PNG)
-And we can also use the front-end touplad data on the database.
+And we can also use the front-end to uplad data on the database.
+![5](https://user-images.githubusercontent.com/61889763/100283003-efbc4a80-2f6c-11eb-98a1-a23a8a02340e.PNG)
