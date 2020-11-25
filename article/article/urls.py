@@ -20,6 +20,6 @@ from articleApp  import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('add_article/', views.add_article),
-    path('get_article/<str:keywords>', views.get_article)
+    path('add_article/', views.add_article)
+
 ]

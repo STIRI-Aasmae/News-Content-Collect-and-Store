@@ -29,11 +29,12 @@ def add_article(request):
     if request.method == 'POST':
         json_data = json.loads(request.body)
         try:
+            # We get the news website from which we want to extract articles
             Website= json_data['Website']
         except KeyError:
             HttpResponse("malformed data!")
         HttpResponse("got json data")
-    #Website = request.POST.get("Website")
+
     op = urlopen(str(Website))
     rd = op.read()
     op.close()
@@ -45,33 +46,26 @@ def add_article(request):
     for news in news_list:
         titles.append(news.title.text)
         urls.append(news.link.text)
-
+    # we get all the URLS of each article in the website using beautifulSoup library
+    # Then we extract information related to each article using newspaper3k library
     for i in range(len(news_list)):
         try:
             article = Article(urls[i], config=config )
             article.download()
             article.parse()
             doc = Document(article.text)
+            # Here we clean the article
             cleanme = doc.summary()
             var = re.sub('<.*?>', '', cleanme)
-            clean_article = Articleinfo(Website=request.POST.get("Website"),Title= str(titles[i]),
+            clean_article = Articleinfo(Website=Website,Title= str(titles[i]),
                           Authors = article.authors,Publish_Date = str(article.publish_date),
                           Article = var, URL = str(urls[i]))
             print(Website)
-
+            # we save the article on the data base
             clean_article.save()
         except :
             continue
 
-
     return HttpResponse("Inserted")
 
-def get_article(request, keywords):
-    compatible_articles = []
-    allArticls = Articleinfo.objects.all()
-    for article in allArticls:
-        if keywords in article.Article:
 
-            compatible_articles.append("{Title"+" : "+str(article.Title)+",Authors"+" : "+str(article.Authors)+",Publish_Date"+" : "+str(article.Publish_Date)+",Article" +" : "+str(article.Article)+",URL" +" : "+str(article.URL)+"}")
-
-    return HttpResponse(json.dumps(compatible_articles))
