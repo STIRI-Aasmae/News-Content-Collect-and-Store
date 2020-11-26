@@ -1,0 +1,19 @@
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#" routerLink="/article">Read an article</a>
+</nav>
+
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading space"><h4>Upload other articles</h4> </div>
+      <div class="panel-body">
+        <div>
+          <div class="form-group">
+            <label class="control-label"></label>
+            <input class="form-control" type="text" placeholder="eg https://news.google.com/news/rss " [(ngModel)]="article.Website">
+            <button class="btn btn-primary" (click)="storeArticles()" >Upload</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

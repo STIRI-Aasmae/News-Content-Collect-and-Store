@@ -1,0 +1,25 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#" routerLink="/new-articles">Upload articles</a>
+</nav>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading space"><h5>Enter a keyword or a sentence to have all the articles related to it</h5> </div>
+    <div class="panel-body">
+      <div class="form-group">
+        
+        <input class="form-control" placeholder= "Type a keyword/sentence" type="enter keywords" [(ngModel)]="Keyword">
+        <button class="btn btn-primary" (click)="search()" >Search</button>
+      </div>
+      <div *ngFor="let a of pageArticles">
+        <h3>{{a.Title}}</h3>
+        <p>{{a.Article}}</p>
+        <a href={{a.URL}}>Click here to return to the original article</a>
+      </div>
+
+
+      
+    </div>
+  </div>
+  
+  
+</div>
