@@ -7,7 +7,7 @@
 2. The second one **ReadarticleFromMgDB** (master2 branch) is an API developed using Django and Djanogorestframework. In this API the user can retreive data from the database by searching articles by keyword.
 ![3](https://user-images.githubusercontent.com/61889763/100280023-cf3dc180-2f67-11eb-9ca9-5efa5442fb34.PNG)
 3. The third one **articleFrontend** (master3 branch) is the front-end of the two API that enable the user to interract with the APIs simply without having any information about the structre of the back-end.\
-For example searchin article talking about satellites from the front-end.
+For example searching article talking about satellites from the front-end.
 ![4](https://user-images.githubusercontent.com/61889763/100281818-df0ad500-2f6a-11eb-86f2-3bdc6aef4535.PNG)
 And we can also use the front-end to uplad data on the database.
 ![5](https://user-images.githubusercontent.com/61889763/100283003-efbc4a80-2f6c-11eb-98a1-a23a8a02340e.PNG)
